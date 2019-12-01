@@ -37,36 +37,49 @@ public class MarketPage {
     @FindBy(xpath = "//div[contains(@class,'n-snippet-list')]")
     private WebElement priceTable;
 
+    By searchField = By.xpath("//span[contains(@class,'suggest2-autocomplete__entered')]");
     By product = By.xpath("//div[@class='price']");
 
-    public void search(String searchName) {
+    MarketPage search(String searchName) {
         search.clear();
         search.sendKeys(searchName);
+        return this;
     }
 
-    void clickSearchButton() {
+    MarketPage checkFillField(){
+        Assertions.assertEquals(webDriver
+                .findElement(searchField)
+                .getAttribute("innerHTML"), "ноутбуки", "Упс, что-то пошло не так");
+        return this;
+    }
+
+    MarketPage clickSearchButton() {
         searchButton.click();
+        return this;
     }
 
-    void setPriceFrom(String price) {
+    MarketPage setPriceFrom(String price) {
         priceFrom.clear();
         priceFrom.sendKeys(price);
+        return this;
     }
 
-    void setPriceTo(String price) {
+    MarketPage setPriceTo(String price) {
         priceTo.clear();
         priceTo.sendKeys(price);
+        return this;
     }
 
-    void setCheckBoxes(String[] brands) {
+    MarketPage setCheckBoxes(String[] brands) {
         for (String brand : brands) {
             String path = "//input[@name='Производитель " + brand + "']";
             String id = webDriver.findElement(By.xpath(path)).getAttribute("id");
             path = "//label[@for='" + id + "']";
             webDriver.findElement(By.xpath(path)).click();
         }
+        return this;
     }
-    void assertCheckBoxes(String[] brands) {
+    MarketPage assertCheckBoxes(String[] brands) {
         List<WebElement> elems = checkBoxesList.findElements(By.tagName("span"));
         for (WebElement elem : elems) {
             String brandName = elem.getText();
@@ -87,15 +100,17 @@ public class MarketPage {
                 }
             }
         }
+        return this;
     }
-    public void clickCheckBox(String boxName) {
+    MarketPage clickCheckBox(String boxName) {
         String path = "//input[@name='" + boxName + "']";
         String id = webDriver.findElement(By.xpath(path)).getAttribute("id");
         path = "//label[@for='" + id + "']";
         webDriver.findElement(By.xpath(path)).click();
+        return this;
     }
 
-    public void assertPriceTable(int priceFrom, int priceTo) {
+    MarketPage assertPriceTable(int priceFrom, int priceTo) {
         wait.until(ExpectedConditions.presenceOfElementLocated(currentPriceTable));
         int lengthList = priceTable.findElements(product).size();
         for (int i = 0; i < lengthList; i++) {
@@ -108,11 +123,14 @@ public class MarketPage {
                     currentPriceInt >= priceFrom && currentPriceInt <= priceTo
                     , "Упс, что-то пошло не так");
         }
+        return this;
     }
 
-    public void clickProduct(String productName) {
+    MarketPage clickProduct(String productName) {
         String path = "//a[contains(@title,'" + productName + "')]";
         webDriver.findElement(By.xpath(path)).click();
+        return this;
     }
+
 
 }

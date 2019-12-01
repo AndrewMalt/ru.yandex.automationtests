@@ -13,12 +13,14 @@ public class MainPage {
     @FindBy(xpath = "//a[@data-id='market']")
     private WebElement market;
 
-    void open() {
+    MainPage open() {
         webDriver.get("https://yandex.ru");
+        return this;
     }
 
-    void goToMarket() {
+    MainPage goToMarket() {
         market.click();
+        return this;
     }
 
 }
