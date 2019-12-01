@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <bytecodeTargetLevel>
+      <module name="ru.yandex.automationtests.testAPI.main" target="1.8" />
+      <module name="ru.yandex.automationtests.testAPI.test" target="1.8" />
+      <module name="ru.yandex.automationtests.testUI.main" target="1.8" />
+      <module name="ru.yandex.automationtests.testUI.test" target="1.8" />
+    </bytecodeTargetLevel>
+  </component>
+</project>

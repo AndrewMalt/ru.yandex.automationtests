@@ -1,0 +1,6 @@
+rootProject.name = 'ru.yandex.automationtests'
+include 'testapps'
+include 'testapps:testUI'
+include 'testapps:testAPI'
+
+
